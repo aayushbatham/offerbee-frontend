@@ -24,8 +24,8 @@ export default function NavbarAuth() {
           <h1 className="text-xl font-bold">OfferBee</h1>
         </Link>
         <nav className="flex items-center gap-4">
-            <Link href="/client">
-              <Button variant="outline">Client</Button>
+            <Link href="/demo">
+              <Button variant="outline">Demo</Button>
             </Link>
           <ModeToggle />
           <Button variant="ghost" onClick={handleLogout}>

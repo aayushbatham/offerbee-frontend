@@ -36,12 +36,12 @@ export default function DashboardLayout({
                 Create Voucher
               </Button>
             </Link>
-            <Link href="/dashboard/settings">
-              <Button variant="ghost" className="w-full justify-start">
-                <Settings className="mr-2 h-4 w-4" />
-                Settings
-              </Button>
-            </Link>
+            {/*<Link href="/dashboard/settings">*/}
+            {/*  <Button variant="ghost" className="w-full justify-start">*/}
+            {/*    <Settings className="mr-2 h-4 w-4" />*/}
+            {/*    Settings*/}
+            {/*  </Button>*/}
+            {/*</Link>*/}
           </nav>
         </aside>
 

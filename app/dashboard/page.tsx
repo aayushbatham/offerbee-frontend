@@ -37,7 +37,7 @@ export default function VouchersPage() {
     const fetchVouchers = async () => {
       try {
         const token = localStorage.getItem('token')
-        const response = await fetch('http://localhost:8080/voucher/my-vouchers', {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/voucher/my-vouchers`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -56,7 +56,7 @@ export default function VouchersPage() {
       }
     }
 
-    fetchVouchers()
+    fetchVouchers();
   }, [])
 
   const formatDate = (dateString: string) => {
@@ -70,7 +70,7 @@ export default function VouchersPage() {
   const deleteVoucher = async (id: string) => {
     try {
       const token = localStorage.getItem('token')
-      const response = await fetch(`http://localhost:8080/voucher/delete/${id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/voucher/delete/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,

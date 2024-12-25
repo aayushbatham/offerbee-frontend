@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import React, { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import {
@@ -23,9 +23,9 @@ export default function LoginPage() {
     setIsLoading(true)
 
     const formData = new FormData(event.currentTarget)
-    
+
     try {
-      const response = await fetch("http://localhost:8080/user/login", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

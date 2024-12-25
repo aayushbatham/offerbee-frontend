@@ -12,7 +12,7 @@ const poppins = Poppins({
 })
 
 export const metadata = {
-  title: 'OfferBee - Digital Voucher System',
+  title: 'OfferBee',
   description: 'Create and manage digital vouchers effortlessly',
 }
 

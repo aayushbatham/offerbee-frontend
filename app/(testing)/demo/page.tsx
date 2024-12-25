@@ -100,7 +100,7 @@ export default function ShopPage() {
   const applyVoucher = async () => {
     setIsLoading(true)
     try {
-      const response = await fetch(`http://localhost:8080/voucher/apply-voucher`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/voucher/apply-voucher`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -132,7 +132,7 @@ export default function ShopPage() {
   const useVoucher = async () => {
     setIsLoading(true)
     try {
-      const response = await fetch(`http://localhost:8080/voucher/use-voucher`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/voucher/use-voucher`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -168,7 +168,7 @@ export default function ShopPage() {
     setIsCheckingOut(true)
     try {
       if (appliedVoucher) {
-        const response = await fetch(`http://localhost:8080/voucher/use-voucher`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/voucher/use-voucher`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

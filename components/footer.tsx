@@ -8,7 +8,7 @@ export default function Footer() {
             <div className="flex items-center gap-2">
               <span className="text-xl font-bold text-yellow-500">🐝</span>
               <span className="text-sm text-muted-foreground">
-                © 2024 OfferBee. All rights reserved.
+                Made with ❤️.
               </span>
             </div>
             <div className="flex gap-4">
