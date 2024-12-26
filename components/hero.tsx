@@ -7,11 +7,10 @@ export default function Hero() {
        <div className="container mx-auto px-4">
          <div className="max-w-3xl mx-auto text-center">
            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-             Buzz-worthy Deals at Your Fingertips 🍯
+             One stop for voucher management🍯
            </h1>
            <p className="text-xl text-muted-foreground mb-8">
-             Create, manage, and share digital vouchers effortlessly. Join thousands of businesses 
-             making their offers sweeter with OfferBee.
+             Create, manage, and share digital vouchers effortlessly.
            </p>
            
            <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -20,9 +19,6 @@ export default function Hero() {
                Start Creating Vouchers
              </Button>
              </Link>
-             <Button size="lg" variant="outline">
-               See How It Works
-             </Button>
            </div>
          </div>
        </div>

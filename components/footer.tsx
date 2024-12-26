@@ -12,14 +12,11 @@ export default function Footer() {
               </span>
             </div>
             <div className="flex gap-4">
-              <Link href="/privacy" className="text-sm text-muted-foreground hover:underline">
-                Privacy Policy
+              <Link href="https://github.com/aayushbatham/offerbee-frontend" className="text-sm text-muted-foreground hover:underline">
+                Github (frontend)
               </Link>
-              <Link href="/terms" className="text-sm text-muted-foreground hover:underline">
-                Terms of Service
-              </Link>
-              <Link href="/contact" className="text-sm text-muted-foreground hover:underline">
-                Contact
+              <Link href="https://github.com/aayushbatham/offerbee-backend" className="text-sm text-muted-foreground hover:underline">
+                Github (backend)
               </Link>
             </div>
           </div>
