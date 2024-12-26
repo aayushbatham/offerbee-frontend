@@ -11,8 +11,8 @@ export default function Navbar() {
             <h1 className="text-xl font-bold">OfferBee</h1>
           </div>
           <nav className="flex items-center gap-4">
-            <Link href="/client">
-              <Button variant="ghost">Client</Button>
+            <Link href="/demo">
+              <Button variant="ghost">Demo</Button>
             </Link>
             <Link href="/login">
               <Button variant="ghost">Login</Button>

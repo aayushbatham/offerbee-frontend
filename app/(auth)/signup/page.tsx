@@ -16,6 +16,7 @@ import { Label } from "@/components/ui/label"
 import { toast } from "sonner"
 import Link from "next/link"
 import { z } from "zod"
+import Navbar from "@/components/navbar";
 
 // Validation schema
 const signupSchema = z.object({
@@ -96,107 +97,101 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="flex h-screen w-full items-center justify-center">
-      <Card className="w-[400px]">
-        <CardHeader className="space-y-1">
-          <div className="flex items-center justify-center mb-4">
-            <Link href="/" className="flex items-center gap-2">
-              <span className="text-2xl">🐝</span>
-              <span className="text-2xl font-bold">OfferBee</span>
-            </Link>
-          </div>
-          <CardTitle className="text-2xl text-center">Create an account</CardTitle>
-          <CardDescription className="text-center">
-            Enter your details below to create your account
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={onSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="username">Username</Label>
-              <Input
-                id="username"
-                name="username"
-                type="text"
-                placeholder="johndoe"
-                required
-                disabled={isLoading}
-              />
-              {errors.username && (
-                <p className="text-sm text-red-500">{errors.username}</p>
-              )}
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="john@example.com"
-                required
-                disabled={isLoading}
-              />
-              {errors.email && (
-                <p className="text-sm text-red-500">{errors.email}</p>
-              )}
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                name="password"
-                type="password"
-                required
-                disabled={isLoading}
-              />
-              {errors.password && (
-                <p className="text-sm text-red-500">{errors.password}</p>
-              )}
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="confirmPassword">Confirm Password</Label>
-              <Input
-                id="confirmPassword"
-                name="confirmPassword"
-                type="password"
-                required
-                disabled={isLoading}
-              />
-              {errors.confirmPassword && (
-                <p className="text-sm text-red-500">{errors.confirmPassword}</p>
-              )}
-            </div>
-            <Button className="w-full" type="submit" disabled={isLoading}>
-              {isLoading ? (
-                <div className="flex items-center gap-2">
-                  <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
-                  Creating account...
+      <>
+        <div className="flex h-screen w-full items-center justify-center">
+          <Card className="w-[400px]">
+            <CardHeader className="space-y-1">
+              <div className="flex items-center justify-center mb-4">
+                <Link href="/" className="flex items-center gap-2">
+                  <span className="text-2xl">🐝</span>
+                  <span className="text-2xl font-bold">OfferBee</span>
+                </Link>
+              </div>
+              <CardTitle className="text-2xl text-center">Create an account</CardTitle>
+              <CardDescription className="text-center">
+                Enter your details below to create your account
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={onSubmit} className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="username">Username</Label>
+                  <Input
+                      id="username"
+                      name="username"
+                      type="text"
+                      placeholder="johndoe"
+                      required
+                      disabled={isLoading}
+                  />
+                  {errors.username && (
+                      <p className="text-sm text-red-500">{errors.username}</p>
+                  )}
                 </div>
-              ) : (
-                "Sign up"
-              )}
-            </Button>
-          </form>
-        </CardContent>
-        <CardFooter className="flex flex-col space-y-4">
-          <div className="text-sm text-muted-foreground text-center">
-            By creating an account, you agree to our{" "}
-            <Link href="/terms" className="underline hover:text-primary">
-              Terms of Service
-            </Link>{" "}
-            and{" "}
-            <Link href="/privacy" className="underline hover:text-primary">
-              Privacy Policy
-            </Link>
-          </div>
-          <div className="text-sm text-center">
-            Already have an account?{" "}
-            <Link href="/login" className="text-primary hover:underline font-medium">
-              Log in
-            </Link>
-          </div>
-        </CardFooter>
-      </Card>
-    </div>
+                <div className="space-y-2">
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      placeholder="john@example.com"
+                      required
+                      disabled={isLoading}
+                  />
+                  {errors.email && (
+                      <p className="text-sm text-red-500">{errors.email}</p>
+                  )}
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="password">Password</Label>
+                  <Input
+                      id="password"
+                      name="password"
+                      type="password"
+                      required
+                      disabled={isLoading}
+                  />
+                  {errors.password && (
+                      <p className="text-sm text-red-500">{errors.password}</p>
+                  )}
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="confirmPassword">Confirm Password</Label>
+                  <Input
+                      id="confirmPassword"
+                      name="confirmPassword"
+                      type="password"
+                      required
+                      disabled={isLoading}
+                  />
+                  {errors.confirmPassword && (
+                      <p className="text-sm text-red-500">{errors.confirmPassword}</p>
+                  )}
+                </div>
+                <Button className="w-full" type="submit" disabled={isLoading}>
+                  {isLoading ? (
+                      <div className="flex items-center gap-2">
+                        <div
+                            className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent"/>
+                        Creating account...
+                      </div>
+                  ) : (
+                      "Sign up"
+                  )}
+                </Button>
+              </form>
+            </CardContent>
+            <CardFooter className="flex flex-col space-y-4">
+              <div className="text-sm text-center">
+                Already have an account?{" "}
+                <Link href="/login" className="text-primary hover:underline font-medium">
+                  Log in
+                </Link>
+              </div>
+            </CardFooter>
+          </Card>
+        </div>
+      </>
+
   )
 }
