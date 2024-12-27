@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
-  CardDescription,
+  CardDescription, CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { toast } from "sonner"
 import Navbar from "@/components/navbar";
+import Link from "next/link";
 
 export default function LoginPage() {
   const router = useRouter()
@@ -90,6 +91,12 @@ export default function LoginPage() {
                 </Button>
               </form>
             </CardContent>
+            <CardFooter className="flex justify-center items-center space-x-2">
+              <h3 className="text-primary font-light text-sm">Don't have an account?</h3>
+              <Link href="/signup" className="text-primary hover:underline font-medium text-sm">
+                Sign up
+              </Link>
+            </CardFooter>
           </Card>
         </div>
       </>

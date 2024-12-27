@@ -12,6 +12,7 @@ import {
 import { Badge } from "@/components/ui/badge"
 import { toast } from "sonner"
 import {Button} from "@/components/ui/button";
+import {useRouter} from "next/navigation";
 
 interface Voucher {
   _id: string
@@ -32,6 +33,7 @@ interface Voucher {
 export default function VouchersPage() {
   const [vouchers, setVouchers] = useState<Voucher[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  const router = useRouter();
 
   useEffect(() => {
     const fetchVouchers = async () => {
@@ -56,6 +58,17 @@ export default function VouchersPage() {
       }
     }
 
+    const isAuthenticatied = () => {
+      const token = localStorage.getItem('token')
+      if (!token) {
+        router.push('/login')
+        toast.error('Please login to view your vouchers')
+        return false
+      }
+      return true
+    }
+
+    isAuthenticatied();
     fetchVouchers();
   }, [])
 

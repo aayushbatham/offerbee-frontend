@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import {useEffect, useState} from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { toast } from "sonner"
@@ -65,6 +65,16 @@ export default function ShopPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [isCheckingOut, setIsCheckingOut] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
+
+  useEffect(() => {
+    const isAuthenticated = () => {
+      const token = localStorage.getItem('token');
+      if(!token){
+        router.push('/login')
+      }
+    }
+    isAuthenticated();
+  }, []);
 
   const addToCart = (product: Product) => {
     setCart(prevCart => {

@@ -97,6 +97,8 @@ export default function CreateVoucherPage() {
     }
   }
 
+  const todayDate = new Date().toISOString().slice(0, 16)
+
   return (
       <div className="max-w-2xl mx-auto py-6">
         <Card>
@@ -117,6 +119,7 @@ export default function CreateVoucherPage() {
                     disabled={isLoading}
                     placeholder="Summer Sale 2024"
                 />
+                <CardDescription>Provide a descriptive name for the voucher.</CardDescription>
               </div>
 
               <div className="space-y-2">
@@ -140,6 +143,9 @@ export default function CreateVoucherPage() {
                     Generate
                   </Button>
                 </div>
+                <CardDescription>
+                  Enter a unique code for the voucher or generate one automatically.
+                </CardDescription>
               </div>
 
               <div className="space-y-2">
@@ -160,6 +166,9 @@ export default function CreateVoucherPage() {
                     <SelectItem value="fixed">Fixed Amount</SelectItem>
                   </SelectContent>
                 </Select>
+                <CardDescription>
+                  Choose whether the discount is a percentage or a fixed amount.
+                </CardDescription>
               </div>
 
               <div className="space-y-2">
@@ -179,6 +188,9 @@ export default function CreateVoucherPage() {
                     max={discountType === "percentage" ? 100 : undefined}
                     step="any"
                 />
+                <CardDescription>
+                  Specify the discount value in percentage or a fixed amount.
+                </CardDescription>
               </div>
 
               <div className="space-y-2">
@@ -190,6 +202,9 @@ export default function CreateVoucherPage() {
                     disabled={isLoading}
                     placeholder="100"
                 />
+                <CardDescription>
+                  Define a minimum cart value for the voucher to be applicable.
+                </CardDescription>
               </div>
 
               {discountType !== "fixed" && (
@@ -202,6 +217,9 @@ export default function CreateVoucherPage() {
                         disabled={isLoading}
                         placeholder="50"
                     />
+                    <CardDescription>
+                      Set a maximum cap on the discount amount for percentage-based discounts.
+                    </CardDescription>
                   </div>
               )}
 
@@ -213,7 +231,11 @@ export default function CreateVoucherPage() {
                     type="datetime-local"
                     required
                     disabled={isLoading}
+                    defaultValue={todayDate}
                 />
+                <CardDescription>
+                  Select the start date and time for the voucher's activation.
+                </CardDescription>
               </div>
 
               <div className="space-y-2">
@@ -225,6 +247,9 @@ export default function CreateVoucherPage() {
                     required
                     disabled={isLoading}
                 />
+                <CardDescription>
+                  Select the expiry date and time for the voucher.
+                </CardDescription>
               </div>
 
               <div className="space-y-2">
@@ -236,6 +261,9 @@ export default function CreateVoucherPage() {
                     disabled={isLoading}
                     placeholder="100"
                 />
+                <CardDescription>
+                  Specify the maximum number of times this voucher can be used.
+                </CardDescription>
               </div>
 
               <div className="flex items-center space-x-2">
@@ -246,6 +274,9 @@ export default function CreateVoucherPage() {
                     disabled={isLoading}
                 />
                 <Label htmlFor="reusable">Reusable</Label>
+                <CardDescription>
+                  Check if the voucher can be reused multiple times by the same user.
+                </CardDescription>
               </div>
 
               <Button className="w-full" type="submit" disabled={isLoading}>
