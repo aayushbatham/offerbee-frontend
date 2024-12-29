@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import React, { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import {
@@ -29,6 +29,13 @@ export default function CreateVoucherPage() {
   const [discountType, setDiscountType] = useState<string>("")
   const [discountValue, setDiscountValue] = useState<string>("")
   const [reusable, setReusable] = useState<boolean>(false)
+  const [includeEligibilityCriteria, setIncludeEligibilityCriteria] = useState(false);
+  const [criteria, setCriteria] = useState({
+    gender: false,
+    ageRange: false,
+    userType: false,
+  });
+
 
   const generateRandomCode = () => {
     const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
@@ -59,6 +66,18 @@ export default function CreateVoucherPage() {
 
     const formData = new FormData(event.currentTarget)
     const token = localStorage.getItem("token")
+    const eligibilityCriteria = includeEligibilityCriteria
+        ? {
+          ...(criteria.gender && { gender: formData.get("gender") || undefined }),
+          ...(criteria.ageRange && {
+            ageRange: [
+              Number(formData.get("ageRangeStart")) || undefined,
+              Number(formData.get("ageRangeEnd")) || undefined,
+            ],
+          }),
+          ...(criteria.userType && { userType: formData.get("userType") || undefined }),
+        }
+        : undefined;
 
     try {
       const response = await fetch(
@@ -80,6 +99,7 @@ export default function CreateVoucherPage() {
               expiryDate: new Date(formData.get("expiryDate") as string),
               usageLimit: Number(formData.get("usageLimit")) || undefined,
               reusable: reusable,
+              eligibilityCriteria
             }),
           }
       )
@@ -159,7 +179,7 @@ export default function CreateVoucherPage() {
                     }}
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Select discount type" />
+                    <SelectValue placeholder="Select discount type"/>
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="percentage">Percentage</SelectItem>
@@ -279,12 +299,113 @@ export default function CreateVoucherPage() {
                 </CardDescription>
               </div>
 
+              <div className="space-y-2">
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                      id="includeEligibilityCriteria"
+                      checked={includeEligibilityCriteria}
+                      onCheckedChange={(checked: boolean) => setIncludeEligibilityCriteria(checked)}
+                      disabled={isLoading}
+                  />
+                  <Label htmlFor="includeEligibilityCriteria">Include Eligibility Criteria</Label>
+                </div>
+              </div>
+
+              {includeEligibilityCriteria && (
+                  <div className="space-y-4 border-t pt-4">
+                    <div className="space-y-2">
+                      <div className="flex items-center space-x-2">
+                        <Checkbox
+                            id="gender"
+                            checked={criteria.gender}
+                            onCheckedChange={(checked: boolean) =>
+                                setCriteria((prev) => ({ ...prev, gender: checked }))
+                            }
+                            disabled={isLoading}
+                        />
+                        <Label htmlFor="gender">Gender</Label>
+                      </div>
+                      {criteria.gender && (
+                          <Select name="gender" disabled={isLoading}>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select gender" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="male">Male</SelectItem>
+                              <SelectItem value="female">Female</SelectItem>
+                              <SelectItem value="other">Other</SelectItem>
+                            </SelectContent>
+                          </Select>
+                      )}
+                    </div>
+
+                    <div className="space-y-2">
+                      <div className="flex items-center space-x-2">
+                        <Checkbox
+                            id="ageRange"
+                            checked={criteria.ageRange}
+                            onCheckedChange={(checked: boolean) =>
+                                setCriteria((prev) => ({ ...prev, ageRange: checked }))
+                            }
+                            disabled={isLoading}
+                        />
+                        <Label htmlFor="ageRange">Age Range</Label>
+                      </div>
+                      {criteria.ageRange && (
+                          <div className="flex space-x-2">
+                            <Input
+                                id="ageRangeStart"
+                                name="ageRangeStart"
+                                type="number"
+                                placeholder="Min Age"
+                                disabled={isLoading}
+                            />
+                            <Input
+                                id="ageRangeEnd"
+                                name="ageRangeEnd"
+                                type="number"
+                                placeholder="Max Age"
+                                disabled={isLoading}
+                            />
+                          </div>
+                      )}
+                    </div>
+
+                    <div className="space-y-2">
+                      <div className="flex items-center space-x-2">
+                        <Checkbox
+                            id="userType"
+                            checked={criteria.userType}
+                            onCheckedChange={(checked: boolean) =>
+                                setCriteria((prev) => ({ ...prev, userType: checked }))
+                            }
+                            disabled={isLoading}
+                        />
+                        <Label htmlFor="userType">User Type</Label>
+                      </div>
+                      {criteria.userType && (
+                          <Select name="userType" disabled={isLoading}>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select user type" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="new">New</SelectItem>
+                              <SelectItem value="old">Old</SelectItem>
+                            </SelectContent>
+                          </Select>
+                      )}
+                    </div>
+                  </div>
+              )}
+
               <Button className="w-full" type="submit" disabled={isLoading}>
                 {isLoading ? "Creating..." : "Create Voucher"}
               </Button>
             </form>
           </CardContent>
+
         </Card>
+
       </div>
   )
 }
